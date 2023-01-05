@@ -1,10 +1,10 @@
 # Cumulocity Data Points Map Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.1-beta/cumulocity-data-points-map-widget-plugin-1.0.1-beta.zip)
 
-This Demo Widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. This plugin help you to display measurements and device locations on map.
+This Data Point Map Widget Plugin is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. This plugin help you to display measurements and device locations on map.
 
 ### Please note that this plugin is in currently under BETA mode.
 
-### Please choose Demo Widget release based on Cumulocity/Application builder version:
+### Please choose Data Point Map Widget Plugin release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | DATA Points Map WIDGET PLUGIN  |
 |--------------------|------------|--------------------------------|
@@ -34,7 +34,7 @@ This Demo Widget is the Cumulocity module federation plugin created using c8ycli
   
 ### Runtime Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.1-beta/cumulocity-data-points-map-widget-plugin-1.0.1-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages 
+* This plugin support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.1-beta/cumulocity-data-points-map-widget-plugin-1.0.1-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages 
 
 ### Local Development?
 
@@ -166,7 +166,7 @@ This Demo Widget is the Cumulocity module federation plugin created using c8ycli
 **Instructions**
 1. Clone the repository: 
 ```
-git clone https://github.com/SoftwareAG/cumulocity-demo-widget-plugin.git
+git clone https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin.git
 ```
 2. Change directory: 
 ```
