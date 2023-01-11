@@ -1,4 +1,4 @@
-# Cumulocity Data Points Map Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.1-beta/cumulocity-data-points-map-widget-plugin-1.0.1-beta.zip)
+# Cumulocity Data Points Map Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.1-beta/cumulocity-data-points-map-widget-plugin-1.0.1-beta.zip)
 
 This Data Point Map Widget Plugin is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. This plugin help you to display measurements and device locations on map.
 
@@ -8,7 +8,7 @@ This Data Point Map Widget Plugin is the Cumulocity module federation plugin cre
 
 |APPLICATION BUILDER | CUMULOCITY | DATA Points Map WIDGET PLUGIN  |
 |--------------------|------------|--------------------------------|
-| 2.0.x(coming soon)| >= 1016.x.x | 1.x.x                          |
+| 2.0.x(coming soon) | >= 1016.x.x| 1.x.x                          |
 
 ![](https://user-images.githubusercontent.com/32765455/102481039-2cb8c000-4087-11eb-8000-8fb956bd9294.jpg)
 
@@ -36,158 +36,6 @@ This Data Point Map Widget Plugin is the Cumulocity module federation plugin cre
 
 * This plugin support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.1-beta/cumulocity-data-points-map-widget-plugin-1.0.1-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages 
 
-### Local Development?
-
-**Requirements:**
-* Git
-* NodeJS (release builds are currently built with `v14.18.0`)
-* NPM (Included with NodeJS)
-
-**External dependencies:**
-
-```
-
-"angular-resize-event": "^2.1.0"
-
-"fontawesome": "4.7.2"
-
-"leaflet-extra-markers": "^1.2.1"
-
-"leaflet2": "npm:leaflet@^1.6.0"
-
-"@angular/material": "11.2.13"
-
-"leaflet.markercluster": "^1.4.1
-
-```
-
-**Installation Steps For App Builder:**
-
-
-**Note:** If you are new to App Builder or not yet downloaded/clone app builder code then please follow [App builder documentation(Build Instructions)](https://github.com/SoftwareAG/cumulocity-app-builder) before proceeding further.
-
-
-
-1. Open Your existing App Builder project and install external dependencies by executing below command or install it manually.
-
-    ```
-
-    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@11.2.13 leaflet.markercluster@1.4.1
-
-    ```
-2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/gp-data-points-map-2.0.0.tgz)**.
-
-
-3. Install the Binary file in app builder.
-
-    ```
-    
-    npm i <binary file path>/gp-data-points-map-x.x.x.tgz
-
-    ```
-
-4. Copy datapoints-map.less file [from here](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/2.0.0/datapoints-map.less) and paste it at /cumulocity-app-builder/ui-assets/
-
-5. Open index.less located at /cumulocity-app-builder/ui-assets/
-
-
-6. Update index.less file with below Material theme. Import at first line in file/beginning of file(Please ignore this step if it already exist).
-
-    ```
-
-    @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
-    ```
-
-7. Update index.less file with below datapoints-map.less. Import at last line/end of file.
-
-    ```
-
-    @import  'datapoints-map.less';
-
-    ```
-
-8. Import GpDataPointsMapModule in custom-widget.module.ts file located at /cumulocity-app-builder/custom-widgets/
-
-    ```  
-
-    import {GpDataPointsMapModule} from  'gp-data-points-map';
-
-    @NgModule({
-
-    imports: [
-
-    GpDataPointsMapModule
-
-    ]
-
-    })
-
-    ```
-
-9. Congratulation! Installation is now completed. Now you can run app builder locally or build and deploy it into your tenant.
-
-    ```
-
-    //Start App Builder
-
-    
-    npm run start
-
-    // Build App
-
-
-    npm run build
-
-
-    // Deploy App
-
-
-    npm run deploy
-
-
-    ```
-  
-
-
-## Build Instructions
-
-**Note:** It is only necessary to follow these instructions if you are modifying/extending this widget, otherwise see the [Installation Guide](#Installation).
-
-**Requirements:**
-  
-* Git  
-
-* NodeJS (release builds are currently built with `v14.18.0`)
-  
-
-* NPM (Included with NodeJS)
-
-**Instructions**
-1. Clone the repository: 
-```
-git clone https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin.git
-```
-2. Change directory: 
-```
-cd cumulocity-data-points-map-widget-plugin
-```
-3. Install the dependencies: 
-```
-npm install
-```
-4. (Optional) Local development server: 
-```
-npm start -- --shell cockpit
-```
-5. Build the app: 
-```
-npm run build
-```
-6. Deploy the app: 
-```
-npm run deploy
-```
 
 ## QuickStart
   
