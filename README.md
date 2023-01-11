@@ -26,7 +26,7 @@ This Data Point Map Widget Plugin is the Cumulocity module federation plugin cre
 *  **Support single device and group devices:** Based on configuration during widget configuration. 
 
 
-## Prerequisites:
+## Prerequisite:
    Cumulocity c8ycli >=1016.x.x
    
 ## Installation
@@ -44,9 +44,7 @@ This guide will teach you how to add widget in your existing or new dashboard.
 
   
 
-**NOTE:** This guide assumes you have followed the [Installation instructions](#Installation)
 
-  
 
 1. Open you application from App Switcher
   
