@@ -26,7 +26,7 @@ This Data Point Map Widget Plugin is the Cumulocity module federation plugin cre
 *  **Support single device and group devices:** Based on configuration during widget configuration. 
 
 
-## Prerequisites:
+## Prerequisite:
    Cumulocity c8ycli >=1016.x.x
    
 ## Installation
