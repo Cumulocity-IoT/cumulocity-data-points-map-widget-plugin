@@ -45,22 +45,23 @@ declare global {
 }
 
 import 'leaflet2/dist/leaflet.js';
-const L: any = window.L;
+let L: any = window.L;
 const moment = moment_;
-import 'leaflet-extra-markers/dist/js/leaflet.extra-markers.js';
-import 'leaflet.markercluster/dist/leaflet.markercluster';
+//import 'leaflet-extra-markers/dist/js/leaflet.extra-markers.js';
+// import 'leaflet.markercluster/dist/leaflet.markercluster';
 
 import { GpDataPointsMapService } from './../services/gp-data-points-map.service';
 import { C8Y_DEVICE_GROUP, C8Y_DEVICE_SUBGROUP } from '../tokens';
 import { MovingMarkerService } from './../services/movingMarker.service';
-import { skip } from 'rxjs/operators';
 import { GPDataPointMapPopupComponent } from './gp-data-points-map-popup.component';
+import { ViewEncapsulation } from '@angular/compiler';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'gp-data-points-map',
   templateUrl: './gp-data-points-map.component.html',
-  styleUrls: ['./gp-data-points-map.component.css'],
+  styleUrls: ['./leaflet.extra-markers.css', './gp-data-points-map.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
   @Input() set config(newConfig: any) {
@@ -122,13 +123,21 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
     private resolver: ComponentFactoryResolver
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+   // if(!L.markerClusterGroup ) {
+      await import("./gp-leaflet");
+      L  = window.L;
+  //}
     this.appId = this.dpService.getAppId();
     this.initializeMap(true);
   }
 
-  public ngAfterViewInit(): void {
-    this.initMapHandlers();
+  public async ngAfterViewInit(){
+    if(!L.markerClusterGroup) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      this.ngAfterViewInit();
+      }
+    else {this.initMapHandlers(); }
   }
 
   refresh() {
