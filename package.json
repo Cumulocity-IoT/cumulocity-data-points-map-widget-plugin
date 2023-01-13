@@ -70,7 +70,7 @@
   "c8y": {
     "application": {
       "name": "Cumulocity Data Points Map Widget Plugin",
-      "contextPath": "datapoints-runtime-widget",
+      "contextPath": "datapoints-map-runtime-widget",
       "key": "datapoints-runtime-widget-application-key",
       "globalTitle": "Custom widget with Module Federation",
       "tabsHorizontal": true,
