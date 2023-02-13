@@ -202,19 +202,19 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
    * Initialize Leaflet Map handlers
    */
   protected initMapHandlers(): void {
-    this.map.invalidateSize();
+    if(this.map) {  this.map.invalidateSize(); }
     this.movingMarkerService.initializeMovingMarker(L);
   }
 
   protected updateMapSize(w: number, h: number): void {
     if (w > 0 && h > 0) {
       this.width = w - 20;
-      this.height = h - this.mapInfosDiv.offsetHeight - 10; // 10px from styling :/
+      this.height = h - this.mapInfosDiv?.offsetHeight - 10; // 10px from styling :/
     } else {
-      this.width = this.mapDiv.parentElement.offsetWidth - 20;
+      this.width = this.mapDiv?.parentElement.offsetWidth - 20;
       this.height =
-        this.mapDiv.parentElement.offsetHeight -
-        this.mapInfosDiv.offsetHeight -
+        this.mapDiv?.parentElement.offsetHeight -
+        this.mapInfosDiv?.offsetHeight -
         10; // 10px from styling :/
     }
   }
