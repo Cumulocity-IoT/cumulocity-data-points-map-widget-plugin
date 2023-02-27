@@ -1,6 +1,6 @@
 {
   "name": "cumulocity-data-points-map-widget-plugin",
-  "version": "1.0.1-beta",
+  "version": "1.0.2",
   "description": "This is the Cumulocity module federation plugin. This plugin help you to display measurements and device locations on map.",
   "scripts": {
     "start": "c8ycli server --env.beta=true",
@@ -10,7 +10,10 @@
     "prebuild": " gulp clean",
     "postbuild": " gulp bundle"
   },
-  "keywords": [],
+  "keywords": [ 
+    "Cumulocity",
+    "Plugin",
+    "Widget"],
   "author": "Darpankumar Lalani - Software AG, Global Presales",
   "license": "Apache-2.0",
   "dependencies": {
@@ -69,8 +72,8 @@
   },
   "c8y": {
     "application": {
-      "name": "Cumulocity Data Points Map Widget Plugin",
-      "contextPath": "datapoints-map-runtime-widget",
+      "name": "Data Points Map Widget Plugin",
+      "contextPath": "sag-ps-pkg-datapoints-map",
       "key": "datapoints-runtime-widget-application-key",
       "globalTitle": "Custom widget with Module Federation",
       "tabsHorizontal": true,

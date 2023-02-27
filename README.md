@@ -2,13 +2,12 @@
 
 This Data Point Map Widget Plugin is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. This plugin help you to display measurements and device locations on map.
 
-### Please note that this plugin is in currently under BETA mode.
 
 ### Please choose Data Point Map Widget Plugin release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | DATA Points Map WIDGET PLUGIN  |
 |--------------------|------------|--------------------------------|
-| 2.0.x(coming soon) | >= 1016.x.x| 1.x.x                          |
+| 2.0.x              | >= 1016.x.x| 1.x.x                          |
 
 ![](https://user-images.githubusercontent.com/32765455/102481039-2cb8c000-4087-11eb-8000-8fb956bd9294.jpg)
 
