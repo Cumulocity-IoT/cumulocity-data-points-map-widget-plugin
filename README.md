@@ -1,4 +1,4 @@
-# Cumulocity Data Points Map Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.2/sag-ps-pkg-datapoints-map-1.0.2.zip)
+# Cumulocity Data Points Map Widget Plugin [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.3/sag-ps-pkg-datapoints-map-1.0.3.zip)
 
 This Data Point Map Widget Plugin is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. This plugin help you to display measurements and device locations on map.
 
@@ -33,7 +33,7 @@ This Data Point Map Widget Plugin is the Cumulocity module federation plugin cre
   
 ### Runtime Deployment?
 
-* This plugin support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.2/sag-ps-pkg-datapoints-map-1.0.2.zip) and install via Administrations --> Ecosystems --> Applications --> Packages 
+* This plugin support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin/releases/download/1.0.3/sag-ps-pkg-datapoints-map-1.0.3.zip) and install via Administrations --> Ecosystems --> Applications --> Packages 
 
 
 ## QuickStart
