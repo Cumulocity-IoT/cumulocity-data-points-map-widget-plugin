@@ -1,6 +1,6 @@
 {
   "name": "cumulocity-data-points-map-widget-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is the Cumulocity module federation plugin. This plugin help you to display measurements and device locations on map.",
   "scripts": {
     "start": "c8ycli server --env.beta=true",
@@ -72,9 +72,9 @@
   },
   "c8y": {
     "application": {
-      "name": "Data Points Map Widget Plugin",
+      "name": "Data Points Map Widget",
       "contextPath": "sag-ps-pkg-datapoints-map",
-      "key": "datapoints-runtime-widget-application-key",
+      "key": "sag-ps-pkg-datapoints-map-application-key",
       "globalTitle": "Custom widget with Module Federation",
       "tabsHorizontal": true,
       "isPackage": true,
@@ -83,7 +83,7 @@
       "requiredPlatformVersion": ">=1016.0.0",
       "exports": [
         {
-          "name": "Cumulocity Data Points Map Widget Plugin",
+          "name": "Cumulocity Data Points Map Widget",
           "module": "GpDataPointsMapModule",
           "path": "./widget/gp-data-points-map.module.ts",
           "description": "This plugin help you to display measurements and device locations on map."
