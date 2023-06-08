@@ -93,17 +93,7 @@
         "widget-plugin": [
           "GpDataPointsMapModule"
         ]
-      },
-      "copy": [
-        {
-          "from": "Images/Datapoint-Map.jpg",
-          "to": "Images/Datapoint-Map.jpg"
-        },
-        {
-          "from": "LICENSE",
-          "to": "LICENSE.txt"
-        }
-      ]
+      }
     },
     "cli": {}
   },
