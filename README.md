@@ -9,7 +9,7 @@ This Data Point Map Widget Plugin is the Cumulocity module federation plugin cre
 |--------------------|------------|--------------------------------|
 | 2.0.x              | >= 1016.x.x| 1.x.x                          |
 
-![](https://user-images.githubusercontent.com/32765455/102481039-2cb8c000-4087-11eb-8000-8fb956bd9294.jpg)
+![Datapoint-map](images/datapoint-map.jpg)
 
 ## Features
 
