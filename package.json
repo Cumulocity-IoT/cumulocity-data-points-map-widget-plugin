@@ -10,10 +10,11 @@
     "prebuild": " gulp clean",
     "postbuild": " gulp bundle"
   },
-  "keywords": [ 
+  "keywords": [
     "Cumulocity",
     "Plugin",
-    "Widget"],
+    "Widget"
+  ],
   "author": "Darpankumar Lalani - Software AG, Global Presales",
   "license": "Apache-2.0",
   "dependencies": {
@@ -94,7 +95,7 @@
           "GpDataPointsMapModule"
         ]
       },
-       "copy": [
+      "copy": [
         {
           "from": "images/datapoint-map.jpg",
           "to": "images/datapoint-map.jpg"
