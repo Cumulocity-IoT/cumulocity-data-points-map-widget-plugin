@@ -22,6 +22,7 @@ import { RouterModule as ngRouterModule } from '@angular/router';
 import { BootstrapComponent, CoreModule, RouterModule } from '@c8y/ngx-components';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { GpDataPointsMapModule } from './widget/gp-data-points-map.module';
+import { CockpitDashboardModule } from '@c8y/ngx-components/context-dashboard';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { GpDataPointsMapModule } from './widget/gp-data-points-map.module';
     ngRouterModule.forRoot([], { enableTracing: false, useHash: true }),
     RouterModule.forRoot(),
     CoreModule.forRoot(),
-    GpDataPointsMapModule
+    CockpitDashboardModule
   ],
   providers: [BsModalRef],
   bootstrap: [BootstrapComponent]

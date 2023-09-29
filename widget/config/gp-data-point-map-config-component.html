@@ -1,4 +1,17 @@
 <div >
+    <div>
+        <form [formGroup]="formGroup">
+            <c8y-datapoint-selection-list
+                [minActiveCount]="1"
+                [maxActiveCount]="1"
+                [defaultFormOptions]="datapointSelectDefaultFormOptions"
+                [config]="datapointSelectionConfig"
+                formControlName="datapoints"
+                name="datapoints"
+            ></c8y-datapoint-selection-list>
+            </form>
+    </div>
+   
     <c8y-form-group>
         <div class="row col-sm-12">
             <div class="col-sm-12 form-horizontal">
