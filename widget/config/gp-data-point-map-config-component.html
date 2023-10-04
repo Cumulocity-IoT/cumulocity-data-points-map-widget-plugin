@@ -1,17 +1,4 @@
 <div >
-    <div>
-        <form [formGroup]="formGroup">
-            <c8y-datapoint-selection-list
-                [minActiveCount]="1"
-                [maxActiveCount]="1"
-                [defaultFormOptions]="datapointSelectDefaultFormOptions"
-                [config]="datapointSelectionConfig"
-                formControlName="datapoints"
-                name="datapoints"
-            ></c8y-datapoint-selection-list>
-            </form>
-    </div>
-   
     <c8y-form-group>
         <div class="row col-sm-12">
             <div class="col-sm-12 form-horizontal">
@@ -35,17 +22,17 @@
               </div>
             </div>
             <div class="row">
-                <div class="form-group col-sm-12 ">
-                    <label for="Measurements" class=" col-sm-4 control-label">Select Measurement:</label>
-                    <div class="col-sm-8 ">
-                        <select  [(ngModel)]="config.measurementType" 
-                        name="MeasurementType" id="MeasurementType">
-                            <option *ngFor="let measurementType of config.measurementTypeList"
-                            [ngValue]='measurementType'
-                            [attr.selected]="config.measurementType.description === measurementType.description ? true : null">
-                                {{measurementType.description}}</option>
-                        </select>
-                    </div>
+                <div class="form-group col-sm-12 " *ngIf="configDevice">
+                    <form [formGroup]="formGroup" >
+                    <c8y-datapoint-selection-list
+                        [minActiveCount]="1"
+                        [maxActiveCount]="1"
+                        [defaultFormOptions]="datapointSelectDefaultFormOptions"
+                        [config]="datapointSelectionConfig"
+                        formControlName="datapoints"
+                        name="datapoints"
+                    ></c8y-datapoint-selection-list>
+                    </form>
                 </div>
             </div>
             <div *ngIf="appId">

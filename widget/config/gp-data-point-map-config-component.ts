@@ -23,8 +23,7 @@ import {
   OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { skip } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { GpDataPointsMapService } from './../services/gp-data-points-map.service';
 import {
   DatapointAttributesFormConfig,
@@ -32,7 +31,7 @@ import {
   KPIDetails,
 } from '@c8y/ngx-components/datapoint-selector';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, ControlContainer, FormBuilder, FormGroup, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormBuilder, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { OnBeforeSave } from '@c8y/ngx-components';
 
@@ -64,11 +63,7 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck, OnDestro
   configDevice = null;
   defaultOutdoorZoom = 14;
   observableDevice$ = null;
-  measurementList = [];
-  observableMeasurements$ = new BehaviorSubject<any>(this.measurementList);
-  private measurementSubs = null;
   appId = null;
-  isBusy = false;
   iconColorCode ='#000000';
   fontColorCode ='#000000'
   datapointSelectDefaultFormOptions: Partial<DatapointAttributesFormConfig> = {
@@ -99,30 +94,8 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck, OnDestro
       this.config.outdoorZoom = this.defaultOutdoorZoom;
     }
 
-    if (!this.config.measurementType) {
-      this.config.measurementType = {};
-    } else {
-      if (this.config.measurementTypeList.length > 0) {
-        let measurementType;
-        for (measurementType of this.config.measurementTypeList) {
-          if (this.config.measurementType.name === measurementType.name) {
-            this.config.measurementType = measurementType;
-          }
-        }
-      }
-    }
     this.appId = this.commonService.getAppId();
-    // Get the measurements as soon as device or group is selected
-    this.measurementSubs = this.observableMeasurements$
-      .pipe(skip(1))
-      .subscribe((mes) => {
-        this.config.measurementTypeList = [];
-        if (mes && mes.length > 0) {
-          this.config.measurementTypeList = [...mes];
-        }
-        this.isBusy = false;
-      });
-
+  
       if(this.config.markerColor){
         this.colorUpdateByTyping(this.config.markerColor);
       }
@@ -135,7 +108,7 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck, OnDestro
       this.formGroup.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
-        this.config.datapoints = { ...value.datapoints };
+        this.config.datapoints = [ ...value.datapoints ];
       });
   }
 
@@ -150,13 +123,6 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck, OnDestro
         this.datapointSelectionConfig.contextAsset = context;
         this.datapointSelectionConfig.assetSelectorConfig
       }
-    //  this.isBusy = true;
-      this.measurementList = [];
-      this.commonService.getFragmentSeries(
-        this.config.device,
-        this.measurementList,
-        this.observableMeasurements$
-      );
     }
   }
 

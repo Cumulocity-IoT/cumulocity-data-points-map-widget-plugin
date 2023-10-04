@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 import { NgModule } from '@angular/core';
-import { CoreModule, DynamicComponentErrorStrategy, DynamicDatapointsResolver, HOOK_COMPONENTS } from '@c8y/ngx-components';
+import { CoreModule, DynamicComponentErrorStrategy, DynamicDatapointsResolver, HOOK_COMPONENTS, hookComponent } from '@c8y/ngx-components';
 import { GpDataPointsMapConfigComponent } from './config/gp-data-point-map-config-component';
 import { GpDataPointsMapComponent } from './components/gp-data-points-map.component';
 import { AngularResizedEventModule } from 'angular-resize-event';
@@ -53,36 +53,30 @@ import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector'
     GPDataPointMapPopupComponent
   ],
   providers: [
-    {
-      provide: HOOK_COMPONENTS,
-      multi: true,
-      useValue: [
-        {
-          id: 'datapoints-map-widget',
-          label: 'Data points Map',
-          previewImage: preview.previewImage,
-          description:'The Data points Map widget help you to display measurements and device locations on map.',
-          component: GpDataPointsMapComponent,
-          configComponent: GpDataPointsMapConfigComponent,
-          resolve: {
-            datapoints: DynamicDatapointsResolver,
+    hookComponent({
+      id: 'datapoints-map-widget',
+      label: 'Data points Map',
+      previewImage: preview.previewImage,
+      description: 'The Data points Map widget help you to display measurements and device locations on map.',
+      component: GpDataPointsMapComponent,
+      configComponent: GpDataPointsMapConfigComponent,
+      resolve: {
+        datapoints: DynamicDatapointsResolver,
+      },
+      data: {
+        settings: {
+          noNewWidgets: false,
+          widgetDefaults: {
+            _width: 4,
+            _height: 4,
           },
-          
-          data: {
-            settings: {
-              noNewWidgets: false,
-              widgetDefaults: {
-                _width: 4,
-                _height: 4,
-              },
-              noDeviceTarget: false,
-              groupsSelectable: true,
-            }
-          } as ContextWidgetConfig,
-          errorStrategy: DynamicComponentErrorStrategy.CUSTOM,
-     }
-    ],
-}],
+          noDeviceTarget: false,
+          groupsSelectable: true,
+        }
+      } as ContextWidgetConfig,
+      errorStrategy: DynamicComponentErrorStrategy.CUSTOM,
+    })
+  ]
 })
 export class GpDataPointsMapModule {
 }

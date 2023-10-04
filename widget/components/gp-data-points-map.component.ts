@@ -31,9 +31,7 @@ import {
 } from '@angular/core';
 import { ResizedEvent } from 'angular-resize-event';
 import {
-  InventoryService,
   IManagedObject,
-  MeasurementService,
   Realtime,
 } from '@c8y/client';
 import * as moment_ from 'moment';
@@ -115,7 +113,6 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dpService: GpDataPointsMapService,
-    private inventoryService: InventoryService,
     private movingMarkerService: MovingMarkerService,
     private realTimeService: Realtime,
     private appRef: ApplicationRef,
@@ -159,7 +156,6 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
   protected initializeMap(isFirstCall): void {
     this.mapDiv = this.mapDivRef.nativeElement;
     this.mapInfosDiv = this.mapInfosDivRef.nativeElement;
-
     this.deviceId = '154724'; // '23227199' ;// '23121787';
     this.measurementType = {
       name: 'T', // 'PM25',
@@ -172,7 +168,11 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
       if (this.inputConfig.device) {
         this.deviceId = this.inputConfig.device.id;
       }
-      this.measurementType = this.inputConfig.measurementType;
+      if(this.inputConfig.datapoints && this.inputConfig.datapoints.length > 0) {
+        const dataPointsObj = this.inputConfig.datapoints.find( dp => dp.__active == true);
+        this.measurementType.name = dataPointsObj.series;
+        this.measurementType.type = dataPointsObj.fragment;
+      }
       this.markerColor = this.inputConfig.markerColor;
       this.markerFontColor = this.inputConfig.markerFontColor;
       this.dashboardField = this.inputConfig.dashboardField;
