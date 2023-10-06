@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 import { NgModule } from '@angular/core';
-import { CoreModule, DynamicComponentErrorStrategy, DynamicDatapointsResolver, HOOK_COMPONENTS, hookComponent } from '@c8y/ngx-components';
+import { CoreModule, DynamicComponentErrorStrategy, DynamicDatapointsResolver, HOOK_COMPONENTS } from '@c8y/ngx-components';
 import { GpDataPointsMapConfigComponent } from './config/gp-data-point-map-config-component';
 import { GpDataPointsMapComponent } from './components/gp-data-points-map.component';
 import { AngularResizedEventModule } from 'angular-resize-event';
@@ -52,8 +52,11 @@ import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector'
     GpDataPointsMapConfigComponent,
     GPDataPointMapPopupComponent
   ],
-  providers: [
-    hookComponent({
+  providers: [{
+
+    provide: HOOK_COMPONENTS,
+    multi: true,
+    useValue:{
       id: 'datapoints-map-widget',
       label: 'Data points Map',
       previewImage: preview.previewImage,
@@ -75,7 +78,8 @@ import { DatapointSelectorModule } from '@c8y/ngx-components/datapoint-selector'
         }
       } as ContextWidgetConfig,
       errorStrategy: DynamicComponentErrorStrategy.CUSTOM,
-    })
+    }
+  }
   ]
 })
 export class GpDataPointsMapModule {
