@@ -20,70 +20,82 @@ import {
   DoCheck,
   Input,
   OnInit,
+  OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { skip } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { GpDataPointsMapService } from './../services/gp-data-points-map.service';
+import {
+  DatapointAttributesFormConfig,
+  DatapointSelectorModalOptions,
+  KPIDetails,
+} from '@c8y/ngx-components/datapoint-selector';
+import { ActivatedRoute } from '@angular/router';
+import { AbstractControl, ControlContainer, FormBuilder, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+import { OnBeforeSave } from '@c8y/ngx-components';
 
+export function exactlyASingleDatapointActive(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const datapoints: any[] = control.value;
+    if (!datapoints || !datapoints.length) {
+      return null;
+    }
+    const activeDatapoints = datapoints.filter(datapoint => datapoint.__active);
+    if (activeDatapoints.length === 1) {
+      return null;
+    }
+    return { exactlyOneDatapointNeedsToBeActive: true };
+  };
+}
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'gp-data-points-map-config',
   templateUrl: './gp-data-point-map-config-component.html',
   styleUrls: ['./gp-data-point-map-config-component.css'],
   encapsulation: ViewEncapsulation.None,
+  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
 })
-export class GpDataPointsMapConfigComponent implements OnInit, DoCheck {
+export class GpDataPointsMapConfigComponent implements OnInit, DoCheck, OnDestroy, OnBeforeSave {
   @Input() config: any = {};
   isOpenCP = false;
   isOpenFontCP = false;
   configDevice = null;
   defaultOutdoorZoom = 14;
   observableDevice$ = null;
-  measurementList = [];
-  observableMeasurements$ = new BehaviorSubject<any>(this.measurementList);
-  private measurementSubs = null;
   appId = null;
-  isBusy = false;
   iconColorCode ='#000000';
   fontColorCode ='#000000'
+  datapointSelectDefaultFormOptions: Partial<DatapointAttributesFormConfig> = {
+    showRange: false,
+    showChart: false,
+    
+  };
+  datapointSelectionConfig: Partial<DatapointSelectorModalOptions> = {};
+  formGroup: ReturnType<GpDataPointsMapConfigComponent['createForm']>;
+  private destroy$ = new Subject<void>();
+  activeDatapointsExists: boolean;
+
   constructor(
-    private commonService: GpDataPointsMapService
+    private commonService: GpDataPointsMapService,
+    private route: ActivatedRoute,
+    private form: NgForm,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     if (this.config.device && this.config.device.id) {
       this.configDevice = this.config.device.id;
+      this.datapointSelectionConfig.contextAsset = this.config.device;
+      this.datapointSelectionConfig.assetSelectorConfig
     }
     if (!this.config.outdoorZoom) {
       this.config.isOutdoorAutoZoom = true;
       this.config.outdoorZoom = this.defaultOutdoorZoom;
     }
 
-    if (!this.config.measurementType) {
-      this.config.measurementType = {};
-    } else {
-      if (this.config.measurementTypeList.length > 0) {
-        let measurementType;
-        for (measurementType of this.config.measurementTypeList) {
-          if (this.config.measurementType.name === measurementType.name) {
-            this.config.measurementType = measurementType;
-          }
-        }
-      }
-    }
     this.appId = this.commonService.getAppId();
-    // Get the measurements as soon as device or group is selected
-    this.measurementSubs = this.observableMeasurements$
-      .pipe(skip(1))
-      .subscribe((mes) => {
-        this.config.measurementTypeList = [];
-        if (mes && mes.length > 0) {
-          this.config.measurementTypeList = [...mes];
-        }
-        this.isBusy = false;
-      });
-
+  
       if(this.config.markerColor){
         this.colorUpdateByTyping(this.config.markerColor);
       }
@@ -91,6 +103,13 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck {
       if(this.config.markerFontColor){
         this.fontColorUpdateByTyping(this.config.markerFontColor);
       }
+
+      this.initForm();
+      this.formGroup.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.config.datapoints = [ ...value.datapoints ];
+      });
   }
 
   /**
@@ -99,14 +118,43 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     if (this.config.device && this.config.device.id !== this.configDevice) {
       this.configDevice = this.config.device.id;
-      this.isBusy = true;
-      this.measurementList = [];
-      this.commonService.getFragmentSeries(
-        this.config.device,
-        this.measurementList,
-        this.observableMeasurements$
-      );
+      const context = this.config.device;
+      if (context?.id) {
+        this.datapointSelectionConfig.contextAsset = context;
+        this.datapointSelectionConfig.assetSelectorConfig
+      }
     }
+  }
+
+  onBeforeSave(): boolean | Promise<boolean> | Observable<boolean> {
+    if (this.formGroup.valid) {
+   //   Object.assign(config, this.formGroup.value);
+      return true;
+    }
+    return false;
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private initForm(): void {
+    this.formGroup = this.createForm();
+    this.form.form.addControl('config', this.formGroup);
+    if (this.config?.datapoints) {
+      this.formGroup.patchValue({ datapoints: this.config.datapoints });
+    }
+  }
+
+  private createForm() {
+    return this.formBuilder.group({
+      
+      datapoints: this.formBuilder.control(new Array<KPIDetails>(), [
+        Validators.required,
+        Validators.minLength(1),
+        exactlyASingleDatapointActive()
+      ])
+    });
   }
 
   // Set outdoor zoom to default
