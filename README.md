@@ -80,7 +80,7 @@ Congratulations! Data Points Map Plugin is configured.
 *  **Cluster Map:** User can switch to cluster map.
 
 
-*  **Select Measurements:**  Based on selected assets or devices, this field will be populated with available measurements/data points. User can select any one measurement which is applicable for selected device or group of devices.
+*  **Add Data point:**  Based on selected assets or devices, this field will be populated with available devices to select data points. User can select any one data point which is applicable for selected device or group of devices.
 
   
 
