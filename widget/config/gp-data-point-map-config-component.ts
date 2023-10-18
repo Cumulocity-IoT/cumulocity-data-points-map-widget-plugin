@@ -35,17 +35,15 @@ import { AbstractControl, ControlContainer, FormBuilder, NgForm, ValidationError
 import { takeUntil } from 'rxjs/operators';
 import { OnBeforeSave } from '@c8y/ngx-components';
 
-export function exactlyASingleDatapointActive(): ValidatorFn {
+export function singleDatapointValidation(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const datapoints: any[] = control.value;
-    if (!datapoints || !datapoints.length) {
+    if (!datapoints || !datapoints.length) {  return null;  }
+    const activeDatapointsList = datapoints.filter(datapoint => datapoint.__active);
+    if (activeDatapointsList.length === 1) {
       return null;
     }
-    const activeDatapoints = datapoints.filter(datapoint => datapoint.__active);
-    if (activeDatapoints.length === 1) {
-      return null;
-    }
-    return { exactlyOneDatapointNeedsToBeActive: true };
+    return { singleDataPointActive: true };
   };
 }
 @Component({
@@ -152,7 +150,7 @@ export class GpDataPointsMapConfigComponent implements OnInit, DoCheck, OnDestro
       datapoints: this.formBuilder.control(new Array<KPIDetails>(), [
         Validators.required,
         Validators.minLength(1),
-        exactlyASingleDatapointActive()
+        singleDatapointValidation()
       ])
     });
   }

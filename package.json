@@ -1,6 +1,6 @@
 {
   "name": "cumulocity-data-points-map-widget-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This is the Cumulocity module federation plugin. This plugin help you to display measurements and device locations on map.",
   "scripts": {
     "start": "c8ycli server ",
